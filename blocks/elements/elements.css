@@ -12,13 +12,13 @@
 
 @media screen and (max-width: 1023px) {
     .elements {
-        grid-template-columns: repeat(2, 284px)
+        grid-template-columns: repeat(2, 284px);
     }
 }
 
 @media screen and (max-width: 767px) {
     .elements {
-        grid-template-columns: repeat(1, 284px)
+        grid-template-columns: repeat(1, 284px);
     }
 }
 
