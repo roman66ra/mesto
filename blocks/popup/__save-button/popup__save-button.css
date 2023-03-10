@@ -10,3 +10,11 @@
     opacity: 0.8;
     cursor: pointer;
   }
+
+@media screen and (max-width: 550px) {
+    .popup__save-button {
+        background-image: url(../../../images/Submit\ Button.svg);
+        width: 238px;
+        height: 46px;
+    }
+}
