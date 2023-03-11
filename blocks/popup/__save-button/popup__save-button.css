@@ -1,9 +1,16 @@
 .popup__save-button {
     width: 358px;
     height: 50px;
-    background-image: url(../../../images/Submit\ Button.jpg);
     border-radius: 2px;
     border: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #000;
 }
 
 .popup__save-button:hover {
@@ -13,8 +20,9 @@
 
 @media screen and (max-width: 550px) {
     .popup__save-button {
-        background-image: url(../../../images/Submit\ Button.svg);
         width: 238px;
         height: 46px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

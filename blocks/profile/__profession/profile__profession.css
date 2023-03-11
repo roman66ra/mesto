@@ -1,6 +1,6 @@
 .profile__profession {
     margin: 0;
-    font-family: 'Inter';
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -9,16 +9,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
 }
 
 @media screen and (max-width: 360px) {
     .profile__profession {
         font-size: 14px;
         line-height: 17px;
-        text-align: center;
-        grid-area: 2fr;
         margin-top: 7px;
-        word-spacing: 4px;
-        width: 249px;
+        margin-left: 17px;
+        text-align: center;
     }
 }

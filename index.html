@@ -26,59 +26,62 @@
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение старого каменного сооружения">
                     <div class="element__text-like">                    
-                        <p class="element__text">Карачаевск</p>
+                        <h2 class="element__text">Карачаевск</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Изображение заката над полем">
                     <div class="element__text-like">                    
-                        <p class="element__text">Гора Эльбрус</p>
+                        <h2 class="element__text">Гора Эльбрус</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Изображение скалистых гор">
                     <div class="element__text-like">                    
-                        <p class="element__text">Домбай</p>
+                        <h2 class="element__text">Домбай</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Изображение заката над полем">
                     <div class="element__text-like">                    
-                        <p class="element__text">Гора Эльбрус</p>
+                        <h2 class="element__text">Гора Эльбрус</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Изображение скалистых гор">
                     <div class="element__text-like">                    
-                        <p class="element__text">Домбай</p>
+                        <h2 class="element__text">Домбай</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение старого каменного сооружения">
                     <div class="element__text-like">                    
-                        <p class="element__text">Карачаево-Черкессия</p>
+                        <h2 class="element__text">Карачаево-Черкессия</h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </div>
             </section>
-            <section class="popup">
-                <div class="popup__container">
-                    <button class="popup__close-button" type="button"></button>
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" class="popup__text" placeholder="Жак-Ив Кусто">
-                    <input type="text" class="popup__text popup__text-last" placeholder="Исследователь океана">
-                    <button type="submit" class="popup__save-button"></button>
-                </div>
-            </section>
+
         </main>
         <footer class="footer">
             <p class="footer__text">&copy; 2023. Mesto Russia</p>
         </footer>
-    <script src="./pages/index.js"></script>
+        <section class="popup">
+            <div class="popup__container">
+                <form class="popup__form">
+                    <button class="popup__close-button" type="button"></button>
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя">
+                    <input type="text" name="job" class="popup__input popup__input_type_job" placeholder="О себе">
+                    <button type="submit" class="popup__save-button">Сохранить</button>
+                </form>
+            </div>
+        </section>
+    <script src="./scripts/scripts.js"></script>
 </body>
 </html>
