@@ -92,6 +92,7 @@ function createCard() {
   imagePopupCard.addEventListener('click', function() {
   imageText.textContent = imagePopupCard.alt;
   imageElement.src = imagePopupCard.src;
+  imageElement.alt = imagePopupCard.alt;
   openPopup(imageOpen)})
   return valueElement
 }
