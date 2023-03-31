@@ -6,12 +6,12 @@ const profileName = document.querySelector('.profile__name');
 const profileProf = document.querySelector('.profile__profession');
 const formElementEdit = document.querySelector('.popup__form-edit');
 const formElementCard = document.querySelector('.popup__form-cards');
-const namePopup = formElementEdit.querySelector('.popup__input_type_name');
-const jobPopup = formElementEdit.querySelector('.popup__input_type_job');
+const inputNameFormProfile = formElementEdit.querySelector('.popup__input_type_name');
+const inputJobFormProfile = formElementEdit.querySelector('.popup__input_type_job');
 // поле с подписью к картинке
-const namePicturePopup = formElementCard.querySelector('.popup__input_type_name-pict');
+const inputNameFormAddNewCard = formElementCard.querySelector('.popup__input_type_name-pict');
 // поле с ссылкой на картинку
-const linkPopup = formElementCard.querySelector('.popup__input_type_link');
+const inputLinkFormAddNewCard = formElementCard.querySelector('.popup__input_type_link');
 // кнопка добавления новой карточки
 const buttonAddNewCard = document.querySelector('.profile__add-button');
 // попап добавления новой карточки
@@ -19,11 +19,14 @@ const popupAddNewCard = document.querySelector('.popup_place-add-card')
 // попап с картинкой
 const popupFullImage = document.querySelector('.popup_place-image');
 // кнопка закрытия картинок
-const closeImage = document.querySelector('.popup__close-button_place-image');
+const buttonCloseImage = document.querySelector('.popup__close-button_place-image');
 const elementsAdd = document.querySelector('.elements');
+const addElement = document.querySelector('#add-element').content;
+const imageOpen = document.querySelector('.popup_place-image');
+const imageText = document.querySelector('.popup__image-text')
 
 function openPopup(namePopup) {
-  namePopup.classList.toggle('popup_opened');
+  namePopup.classList.add('popup_opened');
 }
 
 function closePopup(namePopup) {
@@ -32,16 +35,16 @@ function closePopup(namePopup) {
 
 // открытие попап редактирования профиля
 function openPopupEdit() {
-    namePopup.value = profileName.textContent;
-    jobPopup.value = profileProf.textContent;
-    popupEditProfile.classList.add('popup_opened');
+    inputNameFormProfile.value = profileName.textContent;
+    inputJobFormProfile.value = profileProf.textContent;
+    openPopup(popupEditProfile);
 }
 
 // функция редактирования профиля
 function editPopup(evt) {
   evt.preventDefault(); 
-  profileName.textContent = namePopup.value;
-  profileProf.textContent = jobPopup.value;
+  profileName.textContent = inputNameFormProfile.value;
+  profileProf.textContent = inputJobFormProfile.value;
   closePopup(popupEditProfile);
 }
 
@@ -72,15 +75,34 @@ const initialCards = [
     }
   ];
 
-function createCard() {
-  const addElement = document.querySelector('#add-element').content;
+    
+//Слушатели открытия и закрытия попап редактирования профиля и добавления карточек
+editButton.addEventListener('click', openPopupEdit);
+buttonAddNewCard.addEventListener('click', () => openPopup(popupAddNewCard));
+
+closeButtonEdit.addEventListener('click', () => closePopup(popupEditProfile));
+closeButtonCards.addEventListener('click', () => closePopup(popupAddNewCard));
+
+buttonCloseImage.addEventListener('click', () => closePopup(popupFullImage));
+
+//Слушатели открытия панели редактирования и добавления новой карточки
+
+formElementEdit.addEventListener('submit', editPopup);
+formElementCard.addEventListener('submit', handleSubmitFormAddNewCard);
+
+
+
+function createCard(data) {
   const valueElement = addElement.querySelector('.element').cloneNode(true);
   const likeButton = valueElement.querySelector('.element__like');
   const deleteButton = valueElement.querySelector('.element__delete');
-  const imageOpen = document.querySelector('.popup_place-image');
   const imagePopupCard = valueElement.querySelector('.element__image');
   const imageElement = document.querySelector('.popup__image-element');
-  const imageText = document.querySelector('.popup__image-text')
+  //наполняем карточку данными, которыми берем с входящих даннных data, устанавливаем слушатели
+
+  valueElement.querySelector('.element__image').src = data.link;
+  valueElement.querySelector('.element__image').alt = data.name;
+  valueElement.querySelector('.element__text').textContent = data.name;
 
   likeButton.addEventListener('click', function () {
     likeButton.classList.toggle('element__like_active')});
@@ -94,47 +116,24 @@ function createCard() {
   imageElement.src = imagePopupCard.src;
   imageElement.alt = imagePopupCard.alt;
   openPopup(imageOpen)})
+
   return valueElement
 }
+
+function renderCard(data) {
+  elementsAdd.prepend(createCard(data));
+}
+
 // заполнение карточек из массива
 initialCards.forEach(function (item) {
-    let card = createCard()
-    // наполняем содержимым        
-    card.querySelector('.element__image').src = item.link;
-    card.querySelector('.element__image').alt = item.name;
-    card.querySelector('.element__text').textContent = item.name;
-        
-    // отображаем на странице
-    elementsAdd.append(card);   
-    });
+  renderCard(item)   
+});
 
-function addCard() {
-  let card = createCard()
-  const link = linkPopup.value;
-  const namePic = namePicturePopup.value;
-  card.querySelector('.element__image').src = link;
-  card.querySelector('.element__image').alt = namePic;
-  card.querySelector('.element__text').textContent = namePic;
-  closePopup(popupAddNewCard);
-  return card
-}
-
-function renderCard(evt) {
+function handleSubmitFormAddNewCard(evt) {
   evt.preventDefault();
-  elementsAdd.prepend(addCard());
-  evt.target.reset();
+  const link = inputLinkFormAddNewCard.value;
+  const name = inputNameFormAddNewCard.value;
+  renderCard({link, name})
+  closePopup(popupAddNewCard);
+  formElementCard.reset();
 }
-    
-//Слушатели открытия и закрытия попап редактирования профиля и добавления карточек
-editButton.addEventListener('click', openPopupEdit);
-buttonAddNewCard.addEventListener('click', () => openPopup(popupAddNewCard));
-
-closeButtonEdit.addEventListener('click', () => closePopup(popupEditProfile));
-closeButtonCards.addEventListener('click', () => closePopup(popupAddNewCard));
-
-closeImage.addEventListener('click', () => closePopup(popupFullImage));
-
-//Слушатели открытия панели редактирования и добавления новой карточки
-
-formElementEdit.addEventListener('submit', editPopup);
-formElementCard.addEventListener('submit', renderCard);
