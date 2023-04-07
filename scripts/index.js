@@ -22,11 +22,26 @@ const popupFullImage = document.querySelector('.popup_place-image');
 const buttonCloseImage = document.querySelector('.popup__close-button_place-image');
 const elementsAdd = document.querySelector('.elements');
 const addElement = document.querySelector('#add-element').content;
-const imageOpen = document.querySelector('.popup_place-image');
 const imageText = document.querySelector('.popup__image-text')
 
 function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
+  namePopup.addEventListener('click', closePopupOverley);
+  document.addEventListener('keydown', closePopupEsc)
+}
+
+const closePopupOverley = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup)
+  }
+}
+
+const closePopupEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup)
+  }
 }
 
 function closePopup(namePopup) {
@@ -115,7 +130,7 @@ function createCard(data) {
   imageText.textContent = imagePopupCard.alt;
   imageElement.src = imagePopupCard.src;
   imageElement.alt = imagePopupCard.alt;
-  openPopup(imageOpen)})
+  openPopup(popupFullImage)})
 
   return valueElement
 }
@@ -137,3 +152,4 @@ function handleSubmitFormAddNewCard(evt) {
   closePopup(popupAddNewCard);
   formElementCard.reset();
 }
+
