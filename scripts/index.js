@@ -46,10 +46,30 @@ const closePopupEsc = (evt) => {
 
 function closePopup(namePopup) {
   namePopup.classList.remove('popup_opened');
+  namePopup.removeEventListener('click', closePopupOverley);
+  document.removeEventListener('keydown', closePopupEsc);
+  
+  formElementCard.removeEventListener('submit',  () => enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'}));
+
+  formElementEdit.removeEventListener('submit',  () => enableValidation({
+      formSelector: '.popup__form',
+      inputSelector: '.popup__input',
+      submitButtonSelector: '.popup__save-button',
+      inactiveButtonClass: 'popup__save-button_inactive',
+      inputErrorClass: 'popup__input_type_error',
+      errorClass: 'popup__input-error_active'
+  }));
+  
 }
 
 // открытие попап редактирования профиля
-function openPopupEdit() {
+function openEditProfileForm() {
     inputNameFormProfile.value = profileName.textContent;
     inputJobFormProfile.value = profileProf.textContent;
     openPopup(popupEditProfile);
@@ -89,10 +109,9 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
-
     
 //Слушатели открытия и закрытия попап редактирования профиля и добавления карточек
-editButton.addEventListener('click', openPopupEdit);
+editButton.addEventListener('click', openEditProfileForm);
 buttonAddNewCard.addEventListener('click', () => openPopup(popupAddNewCard));
 
 closeButtonEdit.addEventListener('click', () => closePopup(popupEditProfile));
@@ -105,18 +124,17 @@ buttonCloseImage.addEventListener('click', () => closePopup(popupFullImage));
 formElementEdit.addEventListener('submit', editPopup);
 formElementCard.addEventListener('submit', handleSubmitFormAddNewCard);
 
-
-
 function createCard(data) {
   const valueElement = addElement.querySelector('.element').cloneNode(true);
   const likeButton = valueElement.querySelector('.element__like');
   const deleteButton = valueElement.querySelector('.element__delete');
   const imagePopupCard = valueElement.querySelector('.element__image');
   const imageElement = document.querySelector('.popup__image-element');
+  const valueElementImage = valueElement.querySelector('.element__image');
   //наполняем карточку данными, которыми берем с входящих даннных data, устанавливаем слушатели
 
-  valueElement.querySelector('.element__image').src = data.link;
-  valueElement.querySelector('.element__image').alt = data.name;
+  valueElementImage.src = data.link;
+  valueElementImage.alt = data.name;
   valueElement.querySelector('.element__text').textContent = data.name;
 
   likeButton.addEventListener('click', function () {
