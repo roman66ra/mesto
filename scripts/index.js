@@ -22,7 +22,8 @@ const popupFullImage = document.querySelector('.popup_place-image');
 const buttonCloseImage = document.querySelector('.popup__close-button_place-image');
 const elementsAdd = document.querySelector('.elements');
 const addElement = document.querySelector('#add-element').content;
-const imageText = document.querySelector('.popup__image-text')
+const imageText = document.querySelector('.popup__image-text');
+
 
 function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
@@ -47,25 +48,7 @@ const closePopupEsc = (evt) => {
 function closePopup(namePopup) {
   namePopup.classList.remove('popup_opened');
   namePopup.removeEventListener('click', closePopupOverley);
-  document.removeEventListener('keydown', closePopupEsc);
-  
-  formElementCard.removeEventListener('submit',  () => enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'}));
-
-  formElementEdit.removeEventListener('submit',  () => enableValidation({
-      formSelector: '.popup__form',
-      inputSelector: '.popup__input',
-      submitButtonSelector: '.popup__save-button',
-      inactiveButtonClass: 'popup__save-button_inactive',
-      inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__input-error_active'
-  }));
-  
+  document.removeEventListener('keydown', closePopupEsc); 
 }
 
 // открытие попап редактирования профиля
@@ -76,11 +59,12 @@ function openEditProfileForm() {
 }
 
 // функция редактирования профиля
-function editPopup(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault(); 
   profileName.textContent = inputNameFormProfile.value;
   profileProf.textContent = inputJobFormProfile.value;
   closePopup(popupEditProfile);
+  disableSubmitButton(formElementEdit);
 }
 
 const initialCards = [
@@ -121,7 +105,7 @@ buttonCloseImage.addEventListener('click', () => closePopup(popupFullImage));
 
 //Слушатели открытия панели редактирования и добавления новой карточки
 
-formElementEdit.addEventListener('submit', editPopup);
+formElementEdit.addEventListener('submit', submitEditProfileForm);
 formElementCard.addEventListener('submit', handleSubmitFormAddNewCard);
 
 function createCard(data) {
@@ -166,8 +150,14 @@ function handleSubmitFormAddNewCard(evt) {
   evt.preventDefault();
   const link = inputLinkFormAddNewCard.value;
   const name = inputNameFormAddNewCard.value;
-  renderCard({link, name})
+  renderCard({link, name});
   closePopup(popupAddNewCard);
   formElementCard.reset();
+  disableSubmitButton(formElementCard)
 }
 
+function disableSubmitButton (formElement) {
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  buttonElement.disabled = true
+  buttonElement.classList.add('popup__save-button_inactive');
+}
