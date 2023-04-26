@@ -103,7 +103,6 @@ buttonAddNewCard.addEventListener('click', function () {
   addCardFromValidator.toggleButtonState();
 });
 
-
 closeButtonEdit.addEventListener('click', () => closePopup(popupEditProfile));
 closeButtonCards.addEventListener('click', () => closePopup(popupAddNewCard));
 
