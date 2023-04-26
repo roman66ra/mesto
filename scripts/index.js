@@ -24,13 +24,14 @@ const popupFullImage = document.querySelector('.popup_place-image');
 // кнопка закрытия картинок
 const buttonCloseImage = document.querySelector('.popup__close-button_place-image');
 const elementsAdd = document.querySelector('.elements');
-const addElement = document.querySelector('#add-element').content;
 
 function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
   namePopup.addEventListener('click', closePopupOverley);
   document.addEventListener('keydown', closePopupEsc)
 }
+
+export {openPopup , popupFullImage}
 
 const closePopupOverley = (evt) => {
   if (evt.target === evt.currentTarget) {
@@ -97,7 +98,11 @@ const initialCards = [
     
 //Слушатели открытия и закрытия попап редактирования профиля и добавления карточек
 editButton.addEventListener('click', openEditProfileForm);
-buttonAddNewCard.addEventListener('click', () => openPopup(popupAddNewCard));
+buttonAddNewCard.addEventListener('click', function () {
+  openPopup(popupAddNewCard);
+  addCardFromValidator.toggleButtonState();
+});
+
 
 closeButtonEdit.addEventListener('click', () => closePopup(popupEditProfile));
 closeButtonCards.addEventListener('click', () => closePopup(popupAddNewCard));
@@ -109,22 +114,26 @@ buttonCloseImage.addEventListener('click', () => closePopup(popupFullImage));
 formElementEdit.addEventListener('submit', submitEditProfileForm);
 formElementCard.addEventListener('submit', handleSubmitFormAddNewCard);
 
-initialCards.forEach((item) => {
+function createCard (item) {
   const card = new Card(item, '#add-element');
   const cardElement = card.generateCard();
+  return cardElement
+}
 
-  document.querySelector('.elements').append(cardElement);
+initialCards.forEach((item) => {
+  const cardElement = createCard(item);
+  elementsAdd.append(cardElement);
 });
 
 function handleSubmitFormAddNewCard(evt) {
   evt.preventDefault();
   const link = inputLinkFormAddNewCard.value;
   const name = inputNameFormAddNewCard.value;
-  const card = new Card({link, name}, '#add-element');
-  const cardElement = card.generateCard();
-  document.querySelector('.elements').prepend(cardElement)
+  const cardElement = createCard({link, name})
+  elementsAdd.prepend(cardElement)
   closePopup(popupAddNewCard);
   formElementCard.reset();
+  
 }
 
 const configValidator = {
