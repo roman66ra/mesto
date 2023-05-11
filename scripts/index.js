@@ -1,5 +1,6 @@
 import { FormValidator } from './FormValidator.js'
 import { Card } from "./Card.js";
+import Section from "./Section.js";
 
 const popupEditProfile = document.querySelector('.popup_place-edit');
 const editButton = document.querySelector('.profile__edit-button');
@@ -66,7 +67,6 @@ function submitEditProfileForm(evt) {
   profileName.textContent = inputNameFormProfile.value;
   profileProf.textContent = inputJobFormProfile.value;
   closePopup(popupEditProfile);
-  
 }
 
 const initialCards = [
@@ -132,7 +132,6 @@ function handleSubmitFormAddNewCard(evt) {
   elementsAdd.prepend(cardElement)
   closePopup(popupAddNewCard);
   formElementCard.reset();
-  
 }
 
 const configValidator = {
@@ -148,3 +147,11 @@ editFormValidator.enableValidation();
 
 const addCardFromValidator = new FormValidator (configValidator, formElementCard);
 addCardFromValidator.enableValidation();
+
+const cards = new Section ({items: initialCards, renderer: () => {
+  initialCards.forEach((item) => {
+    const card = new Card(item, '#add-element');
+    const cardElement = card.generateCard();
+    cards.addItem(cardElement);
+  })
+}}, '.elements')

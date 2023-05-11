@@ -1,4 +1,5 @@
-import { openPopup, popupFullImage } from "./index.js";
+import { popupFullImage } from "./index.js";
+import Popup from './Popup.js'
 
 class Card {
     constructor(data, templateSelector) {
@@ -58,7 +59,7 @@ class Card {
       this._imageElement.src = this._element.querySelector('.element__image').src;
       this._imageText.textContent = this._element.querySelector('.element__image').alt;
       this._imageElement.alt = this._element.querySelector('.element__image').src;
-      openPopup(popupFullImage)
+      open(popupFullImage)
     }
 }
 
