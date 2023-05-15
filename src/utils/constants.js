@@ -1,11 +1,3 @@
-import { FormValidator } from './FormValidator.js'
-import { Card } from "./Card.js";
-import Section from "./Section.js";
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js'
-
 const popupEditProfile = document.querySelector('.popup_place-edit');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
@@ -58,64 +50,4 @@ const configValidator = {
   errorClass: 'popup__input-error_active'
 };
 
-const editFormValidator = new FormValidator (configValidator, formElementEdit);
-editFormValidator.enableValidation();
-
-const addCardFromValidator = new FormValidator (configValidator, formElementCard);
-addCardFromValidator.enableValidation();
-
-const popupImage = new PopupWithImage (popupFullImage);
-popupImage.setEventListeners();
-
-function makeCard (item) {
-  const card = new Card (item, '#add-element', () => {
-    popupImage.open(item.name, item.link)
-  })
-  return card.generateCard()
-}
-
-//Отрисовка элементов на странице с помощью Section, получение разметки из Card
-const cards = new Section ({items: initialCards, renderer: (item) => {cards.addItem(makeCard(item));}}, '.elements')
-//Функция из Section отображающая карточки
-cards.renderItem()
-
-//Форма редактирования профиля
-const infoUser = new UserInfo ({ selectorUser: profileName, selectorInfo: profileProf })
-const popupFormEdit = new PopupWithForm ({ 
-  popupSelector: popupEditProfile, 
-  submitFormCallback: (data) => {
-    infoUser.setUserInfo({
-      user: data.name,
-      job: data.job
-    })
-  popupFormEdit.close();
-}})
-popupFormEdit.setEventListeners();
-
-const popupProfile = () => {
-  const {name, job} = infoUser.getUserInfo();
-  inputNameFormProfile.value = name;
-  inputJobFormProfile.value = job;
-}
-
-editButton.addEventListener('click', () => {
-  editFormValidator.enableValidation();
-  popupProfile();
-  popupFormEdit.open();
-  
-})
-
-//форма добавления карточек
-const popupFormCards = new PopupWithForm ({
-  popupSelector: popupAddNewCard,
-  submitFormCallback: (item) => {
-    cards.addItem(makeCard(item))
-    popupFormCards.close()
-  }
-})
-popupFormCards.setEventListeners();
-
-buttonAddNewCard.addEventListener('click', () => {
-  popupFormCards.open()
-  addCardFromValidator.enableValidation()
-})
+export {popupEditProfile, editButton, profileName, profileProf, formElementEdit, formElementCard, inputNameFormProfile, inputJobFormProfile, buttonAddNewCard, popupAddNewCard, popupFullImage, initialCards, configValidator}

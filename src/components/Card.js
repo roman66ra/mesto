@@ -3,8 +3,6 @@ class Card {
       this._name = data.name;
       this._link = data.link;
       this._templateSelector = templateSelector;
-      this._imageElement = document.querySelector('.popup__image-element');
-      this._imageText = document.querySelector('.popup__image-text');
       this._handleCardClick = handleCardClick;
     }
   
@@ -21,7 +19,7 @@ class Card {
     generateCard() {
       this._element = this._getTemplate();
       this._elementImage = this._element.querySelector('.element__image');
-
+      this._likeElement = this._element.querySelector('.element__like');
       this._elementImage.src = this._link;
       this._elementImage.alt = this._name;
       this._element.querySelector('.element__text').textContent = this._name;
@@ -32,7 +30,7 @@ class Card {
     }
   
     _setEventListeners() {
-      this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._likeElement.addEventListener('click', () => {
         this._handleLike();
       });
   
@@ -46,7 +44,7 @@ class Card {
     }
   
     _handleLike() {
-      this._element.querySelector('.element__like').classList.toggle('element__like_active');
+      this._likeElement.classList.toggle('element__like_active');
     }
   
     _handleDelete() {

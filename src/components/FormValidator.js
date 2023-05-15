@@ -52,6 +52,15 @@ class FormValidator {
         return !inputElement.validity.valid;
     });}
     
+    resetValidation = () => {
+      this.toggleButtonState(); 
+
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement) 
+      });
+
+    }
+
     toggleButtonState = () => {
       if (this.hasInvalidInput()) {
         this._buttonElement.classList.add(this._inactiveButtonClass);
