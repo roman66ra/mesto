@@ -1,13 +1,11 @@
-import { popupFullImage } from "./index.js";
-import Popup from './Popup.js'
-
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
       this._name = data.name;
       this._link = data.link;
       this._templateSelector = templateSelector;
       this._imageElement = document.querySelector('.popup__image-element');
       this._imageText = document.querySelector('.popup__image-text');
+      this._handleCardClick = handleCardClick;
     }
   
     _getTemplate() {
@@ -43,7 +41,7 @@ class Card {
       });
   
       this._elementImage.addEventListener('click', () => {
-        this._handelOpenImage();
+        this._handleCardClick(this._name, this._link)
       });
     }
   
@@ -53,13 +51,6 @@ class Card {
   
     _handleDelete() {
       this._element.remove()
-    }
-  
-    _handelOpenImage() {
-      this._imageElement.src = this._element.querySelector('.element__image').src;
-      this._imageText.textContent = this._element.querySelector('.element__image').alt;
-      this._imageElement.alt = this._element.querySelector('.element__image').src;
-      open(popupFullImage)
     }
 }
 

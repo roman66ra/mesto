@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto Russia</title>
 </head>
 <body class="page">
         <header class="header">
-            <img class="header__logo" src="./images/logo.svg" alt="Надпись Mesto Russia">              
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Надпись Mesto Russia">              
         </header>
         <main>
             <section class="profile">
                 <div class="profile__user">
-                    <img class="profile__avatar" src="./images/kusto.jpg" alt="Жак-ив Кусто">
+                    <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Жак-ив Кусто">
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__edit-button"></button>
@@ -56,7 +55,7 @@
                 <button class="popup__close-button popup__close-button_place-cards" type="button"></button>
                 <form class="popup__form popup__form-cards" name="form-cards" novalidate>
                     <h2 class="popup__title">Новое место</h2>
-                    <input type="text" id="image-name" name="name-pict" class="popup__input popup__input_type_name-pict" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input type="text" id="image-name" name="name" class="popup__input popup__input_type_name-pict" placeholder="Название" minlength="2" maxlength="30" required>
                     <span class="image-name-error"></span>
                     <input name="link" id="image-url" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" type="url" required>
                     <span class="image-url-error"></span>
@@ -71,8 +70,5 @@
                 <figcaption class="popup__image-text"></figcaption>
             </figure>
         </section>
-    <script type="module" src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
 </body>
 </html>
