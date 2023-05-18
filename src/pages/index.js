@@ -19,8 +19,7 @@ popupImage.setEventListeners();
 
 function makeCard (item) {
   const card = new Card (item, '#add-element', () => {
-    popupImage.open(item.name, item.link)
-  })
+    popupImage.open(item.name, item.link)})
   return card.generateCard()
 }
 
@@ -31,9 +30,8 @@ cards.renderItem()
 
 //Форма редактирования профиля
 const infoUser = new UserInfo ({ user: profileName, info: profileProf })
-const popupFormEdit = new PopupWithForm ({ 
-  popupSelector: popupEditProfile, 
-  submitFormCallback: (data) => {
+const popupFormEdit = new PopupWithForm ({
+  popup: popupEditProfile, submitFormCallback: (data) => {
     infoUser.setUserInfo({
       user: data.name,
       job: data.job
@@ -52,13 +50,12 @@ editButton.addEventListener('click', () => {
   editFormValidator.resetValidation()
   fillProfileInputs();
   popupFormEdit.open();
-  
 })
 
 //форма добавления карточек
 const popupFormCards = new PopupWithForm ({
-  popupSelector: popupAddNewCard,
-  submitFormCallback: (item) => {
+  popup: popupAddNewCard, submitFormCallback:
+  (item) => {
     cards.addItem(makeCard(item))
     popupFormCards.close()
   }

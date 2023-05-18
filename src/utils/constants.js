@@ -1,4 +1,4 @@
-const popupEditProfile = document.querySelector('.popup_place-edit');
+
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileProf = document.querySelector('.profile__profession');
@@ -11,9 +11,11 @@ const inputJobFormProfile = formElementEdit.querySelector('.popup__input_type_jo
 // кнопка добавления новой карточки
 const buttonAddNewCard = document.querySelector('.profile__add-button');
 // попап добавления новой карточки
-const popupAddNewCard = document.querySelector('.popup_place-add-card')
+const popupAddNewCard = ('.popup_place-add-card')
 // попап с картинкой
-const popupFullImage = document.querySelector('.popup_place-image');
+const popupFullImage = ('.popup_place-image');
+const popupEditProfile = ('.popup_place-edit');
+
 
 const initialCards = [
     {
