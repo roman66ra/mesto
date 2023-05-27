@@ -1,9 +1,13 @@
 
 const editButton = document.querySelector('.profile__edit-button');
+const editAvatarButton = document.querySelector('.profile__avatar-image-edit')
 const profileName = document.querySelector('.profile__name');
+
+const profileAvatar = document.querySelector('.profile__avatar')
 const profileProf = document.querySelector('.profile__profession');
 const formElementEdit = document.querySelector('.popup__form-edit');
 const formElementCard = document.querySelector('.popup__form-cards');
+const formElementAvatar = document.querySelector('.popup__form-avatar');
 //инпут формы профиля имя
 const inputNameFormProfile = formElementEdit.querySelector('.popup__input_type_name');
 //инпут формы профиля профессия
@@ -15,35 +19,8 @@ const popupAddNewCard = ('.popup_place-add-card')
 // попап с картинкой
 const popupFullImage = ('.popup_place-image');
 const popupEditProfile = ('.popup_place-edit');
+const initialCards = []
 
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-    
 const configValidator = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
@@ -52,4 +29,4 @@ const configValidator = {
   errorClass: 'popup__input-error_active'
 };
 
-export {popupEditProfile, editButton, profileName, profileProf, formElementEdit, formElementCard, inputNameFormProfile, inputJobFormProfile, buttonAddNewCard, popupAddNewCard, popupFullImage, initialCards, configValidator}
+export {initialCards, formElementAvatar, editAvatarButton, profileAvatar, popupEditProfile, editButton, profileName, profileProf, formElementEdit, formElementCard, inputNameFormProfile, inputJobFormProfile, buttonAddNewCard, popupAddNewCard, popupFullImage, configValidator}
